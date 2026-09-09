@@ -1,0 +1,103 @@
+# rt script — Web Portfolio
+
+เว็บพอร์ตโฟลิโอ / เรซูเม่ ของ **Ratchanon (Ratchx)** — FiveM Developer & Full-Stack Developer
+ธีม dark hacker terminal เขียนด้วย Next.js 15 (App Router) + TypeScript + Tailwind CSS v4
+รองรับสองภาษา (ไทย / อังกฤษ) สลับได้จากปุ่ม TH / EN
+
+---
+
+## รันในเครื่อง
+
+```bash
+npm install
+npm run dev
+```
+
+เปิด http://localhost:3000
+
+คำสั่งอื่น:
+
+```bash
+npm run build
+npm start
+```
+
+---
+
+## แก้เนื้อหา
+
+ข้อความทั้งเว็บอยู่ในไฟล์เดียว: **`lib/content.ts`**
+แก้ที่นี่ที่เดียว แล้วทั้งหน้าเว็บและหน้า `/resume` เปลี่ยนตามทันที
+
+| ตัวแปร | ใช้ทำอะไร |
+| --- | --- |
+| `profile` | ชื่อ อีเมล GitHub บริษัท และบรรทัดที่ไล่พิมพ์บนหน้าแรก |
+| `stats` | ตัวเลข 4 ช่องบนหน้าแรก |
+| `about` | ย่อหน้าแนะนำตัว และตาราง neofetch |
+| `skills` | ทักษะแยกเป็น 4 กลุ่ม พร้อมระดับ (`level` เป็นเปอร์เซ็นต์) |
+| `experience` | ประวัติการทำงาน เรียงใหม่ไปเก่า |
+| `projects` | ผลงานที่ผ่านมา |
+| `ui` | ข้อความปุ่มและหัวข้อต่าง ๆ |
+
+ทุกข้อความเป็นออบเจ็กต์ `{ th: "...", en: "..." }` ใส่ให้ครบทั้งสองภาษา
+
+> **หมายเหตุเรื่องปี** — ช่วงเวลาในหัวข้อ `experience` (`period`) กรอกไว้เป็นค่าประมาณ
+> จากระยะเวลาที่ให้มา แก้ให้ตรงกับความจริงได้เลย
+
+## แก้สี / ธีม
+
+โทนสีทั้งหมดเป็น CSS variable อยู่ในบล็อก `@theme` ของ **`app/globals.css`**
+เช่น `--color-acid` คือเขียวเรืองแสงที่ใช้เป็นสีหลัก เปลี่ยนค่าเดียวเปลี่ยนทั้งเว็บ
+
+---
+
+## โครงสร้าง
+
+```
+app/
+  layout.tsx        ฟอนต์ metadata และ provider ภาษา
+  page.tsx          หน้าแรก ประกอบทุก section
+  resume/page.tsx   หน้าเรซูเม่ สั่งพิมพ์เป็น PDF ได้
+  globals.css       ธีม เอฟเฟกต์ และสไตล์ตอนพิมพ์
+  icon.svg          favicon
+components/
+  BootScreen        อินโทรบูตเครื่อง เล่นครั้งเดียวต่อแท็บ
+  MatrixRain        ฝนโค้ดพื้นหลัง
+  Nav Hero About Skills Experience Projects Contact Footer
+  TerminalWidget    คอนโซลกดเล่นได้ พิมพ์ help ดูคำสั่ง
+  ResumeDoc         เนื้อหาหน้าเรซูเม่
+lib/
+  content.ts        เนื้อหาทั้งหมด
+  lang.tsx          ระบบสลับภาษา
+  site.ts           URL หลักของเว็บ
+```
+
+---
+
+## ดีพลอยขึ้น Vercel
+
+1. push โค้ดขึ้น GitHub
+2. เข้า [vercel.com/new](https://vercel.com/new) แล้ว Import repo นี้
+3. Vercel ตรวจเจอ Next.js เอง กด **Deploy** ได้เลย ไม่ต้องตั้งค่าอะไรเพิ่ม
+
+หลังผูกโดเมนจริงแล้ว ตั้ง environment variable นี้เพื่อให้ metadata และ sitemap ชี้ถูกที่:
+
+```
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+```
+
+หรือดีพลอยจากเครื่องด้วย CLI:
+
+```bash
+npx vercel
+```
+
+---
+
+## จุดที่ซ่อนไว้
+
+- พิมพ์ `help` ในคอนโซลท้ายหน้า เพื่อดูคำสั่งทั้งหมด (`whoami`, `neofetch`, `skills`, `exp`, `sudo` …)
+- ลูกศรขึ้น-ลงในคอนโซล ย้อนคำสั่งเดิมได้เหมือนเชลล์จริง
+- คลิกที่ไหนก็ได้ตอนหน้าบูต เพื่อข้ามอินโทร
+- เปิด `/resume` แล้วกดปุ่มพิมพ์ จะได้ PDF พื้นขาวตัวดำ ส่งสมัครงานได้เลย
+- ถ้าเครื่องผู้ใช้ตั้งค่า reduced motion ไว้ อนิเมชันและฝนโค้ดจะปิดให้อัตโนมัติ
