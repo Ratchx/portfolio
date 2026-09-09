@@ -11,7 +11,6 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  // ไฮไลต์เมนูตามหัวข้อที่อยู่ในจอ
   useEffect(() => {
     const sections = nav
       .map((n) => document.getElementById(n.id))

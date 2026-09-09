@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 
 const GLYPHS = "01アイウエオカキクケコサシスセソタチツテトナニヌネノabcdefRT{}<>/\\[]$#";
 
-/** ฝนโค้ดพื้นหลัง วาดจาง ๆ ให้ไม่แย่งความสนใจจากเนื้อหา */
 export default function MatrixRain() {
   const ref = useRef<HTMLCanvasElement>(null);
 
@@ -42,7 +41,6 @@ export default function MatrixRain() {
       );
     };
 
-    // ~18fps ก็พอสำหรับเอฟเฟกต์นี้ และประหยัดแบตบนโน้ตบุ๊ก
     const FRAME_MS = 55;
 
     const draw = (now: number) => {
@@ -59,7 +57,6 @@ export default function MatrixRain() {
         const x = i * FONT_SIZE;
         const y = drops[i] * FONT_SIZE;
 
-        // หัวแถวสว่างกว่าหางเล็กน้อย ให้ดูมีทิศทาง
         ctx.fillStyle = Math.random() > 0.985 ? "rgba(0,255,156,0.75)" : "rgba(0,255,156,0.22)";
         ctx.fillText(char, x, y);
 

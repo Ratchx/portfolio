@@ -1,13 +1,18 @@
-/**
- * ─────────────────────────────────────────────────────────────
- *  RESUME CONTENT — ทุกข้อความของเว็บอยู่ในไฟล์นี้ไฟล์เดียว
- *  แก้ที่นี่ที่เดียว เว็บเปลี่ยนทั้งหมด (ไทย/อังกฤษ)
- * ─────────────────────────────────────────────────────────────
- */
 
 export type Lang = "th" | "en";
-/** ข้อความสองภาษา */
 export type L = { th: string; en: string };
+
+export const SINCE = {
+  coding: 2021,
+  fivem: 2024,
+} as const;
+
+export function experienceYears(currentYear: number) {
+  return {
+    coding: Math.max(0, currentYear - SINCE.coding),
+    fivem: Math.max(0, currentYear - SINCE.fivem),
+  };
+}
 
 export const profile = {
   name: "Ratchanon",
@@ -22,7 +27,6 @@ export const profile = {
     th: "FiveM Developer / Full-Stack Developer",
     en: "FiveM Developer / Full-Stack Developer",
   } as L,
-  /** บรรทัดที่ไล่พิมพ์ใต้ชื่อบนหน้าแรก */
   typedRoles: [
     { th: "FiveM Developer", en: "FiveM Developer" },
     { th: "Lua / TypeScript Engineer", en: "Lua / TypeScript Engineer" },
@@ -35,10 +39,9 @@ export const profile = {
   } as L,
 } as const;
 
-/** ตัวเลขสรุปบนหน้าแรก */
 export const stats: { value: string; label: L }[] = [
-  { value: "5", label: { th: "ปีที่เขียนโค้ด", en: "Years coding" } },
-  { value: "2", label: { th: "ปีสาย FiveM", en: "Years on FiveM" } },
+  { value: "{coding}", label: { th: "ปีที่เขียนโค้ด", en: "Years coding" } },
+  { value: "{fivem}", label: { th: "ปีสาย FiveM", en: "Years on FiveM" } },
   { value: "3", label: { th: "เมืองที่ดูแล", en: "Servers shipped" } },
   { value: "4,400+", label: { th: "ผู้เล่นรวม", en: "Players served" } },
 ];
@@ -54,8 +57,8 @@ export const nav: { id: string; label: L }[] = [
 export const about: { body: L[]; facts: { k: L; v: L }[] } = {
   body: [
     {
-      th: "ผมชื่อรัชชานนท์ ใช้ชื่อในวงการว่า rt script เขียนโค้ดมา 5 ปี เริ่มจาก JavaScript เป็นภาษาแรก แล้วขยับมาสาย FiveM เต็มตัวเมื่อ 2 ปีที่แล้ว",
-      en: "I am Ratchanon, shipping under the handle rt script. Five years writing code, starting with JavaScript, and the last two focused fully on FiveM.",
+      th: "ผมชื่อรัชชานนท์ ใช้ชื่อในวงการว่า rt script เขียนโค้ดมา {coding} ปี เริ่มจาก JavaScript เป็นภาษาแรก แล้วขยับมาสาย FiveM เต็มตัวเมื่อ {fivem} ปีที่แล้ว",
+      en: "I am Ratchanon, shipping under the handle rt script. {coding} years writing code, starting with JavaScript, and the last {fivem} focused fully on FiveM.",
     },
     {
       th: "ก่อนหน้านั้นทำ Discord Bot เติมเกมที่ต่อ Payment Gateway จริง และเว็บ E-commerce ประสบการณ์ชุดนั้นทำให้ผมมองเมืองเป็นระบบ ไม่ใช่แค่กองสคริปต์ มีฐานข้อมูล มีเงินจริง และมีคนใช้งานพร้อมกันหลักพัน",
@@ -98,7 +101,7 @@ export const skills: SkillGroup[] = [
       {
         name: "JavaScript",
         level: 90,
-        note: { th: "ภาษาแรก ใช้มาตลอด 5 ปี", en: "First language, five years in" },
+        note: { th: "ภาษาแรก ใช้มาตลอด {coding} ปี", en: "First language, {coding} years in" },
       },
       {
         name: "TypeScript",
@@ -114,7 +117,7 @@ export const skills: SkillGroup[] = [
   },
   {
     title: { th: "FiveM", en: "FiveM" },
-    hint: { th: "งานหลัก 2 ปีเต็ม", en: "Two years, full time" },
+    hint: { th: "งานหลัก {fivem} ปีเต็ม", en: "{fivem} years, full time" },
     items: [
       {
         name: "Resource Architecture",
@@ -204,7 +207,6 @@ export type Job = {
   stack: string[];
 };
 
-/** เรียงใหม่ไปเก่า — แก้ช่วงปีได้ที่ field period */
 export const experience: Job[] = [
   {
     org: "BT GLOBAL INFINITY CO., LTD.",

@@ -16,9 +16,7 @@ function CopyButton({ value }: { value: string }) {
       await navigator.clipboard.writeText(value);
       setDone(true);
       window.setTimeout(() => setDone(false), 1600);
-    } catch {
-      /* บางบราวเซอร์บล็อกคลิปบอร์ด ปล่อยให้ผู้ใช้เลือกข้อความเอง */
-    }
+    } catch {}
   };
 
   return (

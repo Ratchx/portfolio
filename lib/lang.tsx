@@ -5,47 +5,71 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
   type ReactNode,
 } from "react";
-import type { L, Lang } from "./content";
+import { experienceYears, type L, type Lang } from "./content";
 
 type LangCtx = {
   lang: Lang;
   toggle: () => void;
-  /** หยิบข้อความตามภาษาที่เลือกอยู่ */
   t: (value: L) => string;
+  fmt: (value: string) => string;
+  years: { coding: number; fivem: number };
 };
 
 const Ctx = createContext<LangCtx | null>(null);
 const STORAGE_KEY = "rt.lang";
 
-export function LangProvider({ children }: { children: ReactNode }) {
+export function LangProvider({
+  children,
+  year: serverYear,
+}: {
+  children: ReactNode;
+  year: number;
+}) {
   const [lang, setLang] = useState<Lang>("th");
+  const [year, setYear] = useState(serverYear);
 
-  // อ่านค่าที่เคยเลือกไว้หลัง hydrate เพื่อไม่ให้ server/client ต่างกัน
   useEffect(() => {
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY);
       if (saved === "th" || saved === "en") setLang(saved);
-    } catch {
-      /* โหมดส่วนตัวของบราวเซอร์อาจบล็อก storage */
-    }
+    } catch {}
   }, []);
+
+  useEffect(() => {
+    const actual = new Date().getFullYear();
+    if (actual !== serverYear) setYear(actual);
+  }, [serverYear]);
 
   useEffect(() => {
     document.documentElement.lang = lang;
     try {
       window.localStorage.setItem(STORAGE_KEY, lang);
-    } catch {
-      /* ไม่เป็นไร ใช้ค่า default ต่อได้ */
-    }
+    } catch {}
   }, [lang]);
 
-  const toggle = useCallback(() => setLang((l) => (l === "th" ? "en" : "th")), []);
-  const t = useCallback((value: L) => value[lang], [lang]);
+  const years = useMemo(() => experienceYears(year), [year]);
 
-  return <Ctx.Provider value={{ lang, toggle, t }}>{children}</Ctx.Provider>;
+  const fmt = useCallback(
+    (value: string) =>
+      value
+        .replaceAll("{coding}", String(years.coding))
+        .replaceAll("{fivem}", String(years.fivem)),
+    [years],
+  );
+
+  const toggle = useCallback(() => setLang((l) => (l === "th" ? "en" : "th")), []);
+  const t = useCallback((value: L) => fmt(value[lang]), [fmt, lang]);
+
+  const value = useMemo(
+    () => ({ lang, toggle, t, fmt, years }),
+    [lang, toggle, t, fmt, years],
+  );
+
+  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 
 export function useLang() {

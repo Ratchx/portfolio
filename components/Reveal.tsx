@@ -4,12 +4,10 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
-  /** หน่วงเป็นมิลลิวินาที ใช้ไล่การ์ดให้โผล่ทีละใบ */
   delay?: number;
   className?: string;
 };
 
-/** ค่อย ๆ เฟดเนื้อหาขึ้นมาตอนเลื่อนถึง */
 export default function Reveal({ children, delay = 0, className = "" }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [seen, setSeen] = useState(false);

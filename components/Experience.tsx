@@ -19,7 +19,6 @@ export default function Experience() {
       <ol className="relative space-y-6 border-l border-line pl-6 sm:pl-9">
         {experience.map((job, i) => (
           <li key={job.org} className="relative">
-            {/* จุดบนไทม์ไลน์ */}
             <span
               aria-hidden="true"
               className={`absolute top-6 -left-[1.9rem] size-2.5 rounded-full border-2 border-bg sm:-left-[2.65rem] ${

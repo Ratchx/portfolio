@@ -6,7 +6,6 @@ import { useLang } from "@/lib/lang";
 import Reveal from "./Reveal";
 import Section from "./Section";
 
-/** แถบระดับความถนัด วิ่งขึ้นตอนเลื่อนมาถึง */
 function Bar({ level }: { level: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);

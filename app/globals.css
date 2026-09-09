@@ -31,19 +31,16 @@
   }
 
   html {
-    /* ใช้ตอน Lenis ยังไม่ทำงาน เช่น reduced motion หรือช่วงก่อน hydrate */
     scroll-behavior: smooth;
     scroll-padding-top: 5.5rem;
     -webkit-text-size-adjust: 100%;
   }
 
-  /* ---- Lenis: smooth scroll ---- */
   html.lenis,
   html.lenis body {
     height: auto;
   }
 
-  /* ปล่อยให้ Lenis คุมจังหวะเอง ไม่ให้ smooth ของเบราว์เซอร์มาซ้อน */
   .lenis.lenis-smooth {
     scroll-behavior: auto !important;
   }
@@ -95,7 +92,6 @@
 }
 
 @layer utilities {
-  /* ---- backdrop: blueprint grid + vignette ---- */
   .bg-grid {
     background-image:
       linear-gradient(to right, rgba(0, 255, 156, 0.045) 1px, transparent 1px),
@@ -103,7 +99,6 @@
     background-size: 44px 44px;
   }
 
-  /* หรี่ฝนโค้ดตรงกลางจอ ให้ตัวหนังสือคอลัมน์กลางอ่านง่าย แต่ยังเห็นเอฟเฟกต์ที่ขอบ */
   .rain-mask {
     -webkit-mask-image: linear-gradient(
       to right,
@@ -126,7 +121,6 @@
     mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 40%, transparent 100%);
   }
 
-  /* ---- CRT scanlines ---- */
   .scanlines::after {
     content: "";
     position: fixed;
@@ -155,7 +149,6 @@
     text-wrap: balance;
   }
 
-  /* ---- caret ---- */
   .caret::after {
     content: "";
     display: inline-block;
@@ -173,7 +166,6 @@
     }
   }
 
-  /* ---- glitch ---- */
   .glitch {
     position: relative;
     display: inline-block;
@@ -213,7 +205,6 @@
     96% { transform: translate(1px, 0); opacity: 0.5; }
   }
 
-  /* ---- reveal on scroll ---- */
   .reveal {
     opacity: 0;
     transform: translateY(18px);
@@ -264,7 +255,6 @@
   }
 }
 
-/* ---- print: resume becomes clean paper ---- */
 @media print {
   @page {
     size: A4;

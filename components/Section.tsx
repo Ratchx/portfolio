@@ -9,7 +9,6 @@ type Props = {
   id: string;
   index: string;
   title: L;
-  /** คำสั่งเทอร์มินัลปลอมใต้หัวข้อ ให้อารมณ์คอนโซล */
   command: string;
   children: ReactNode;
 };

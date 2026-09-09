@@ -14,7 +14,6 @@ const LINES = [
 
 const LINE_MS = 130;
 
-/** อินโทรสไตล์บูตเครื่อง เล่นครั้งเดียวต่อแท็บ กดที่ไหนก็ข้ามได้ */
 export default function BootScreen() {
   const [visible, setVisible] = useState(false);
   const [shown, setShown] = useState(0);
@@ -47,7 +46,6 @@ export default function BootScreen() {
     };
   }, []);
 
-  // ปลดล็อกการเลื่อนหน้าเมื่อม่านปิดสนิท
   useEffect(() => {
     if (!closing) return;
     const t = window.setTimeout(() => {
@@ -55,9 +53,7 @@ export default function BootScreen() {
       document.body.style.overflow = "";
       try {
         window.sessionStorage.setItem("rt.booted", "1");
-      } catch {
-        /* ไม่ซีเรียส แค่จะเล่นซ้ำในแท็บนี้ */
-      }
+      } catch {}
     }, 520);
     return () => window.clearTimeout(t);
   }, [closing]);

@@ -18,7 +18,6 @@ export default function ResumeDoc() {
 
   return (
     <div className="print-plain mx-auto max-w-3xl px-5 py-10 sm:px-8">
-      {/* แถบเครื่องมือ ไม่ติดไปตอนพิมพ์ */}
       <div className="no-print mb-8 flex flex-wrap items-center gap-3">
         <Link
           href="/"
@@ -44,7 +43,6 @@ export default function ResumeDoc() {
         </button>
       </div>
 
-      {/* ── หัวกระดาษ ── */}
       <header className="print-rule border-b border-line pb-5">
         <h1 className="text-3xl font-extrabold tracking-tight text-white">
           {th ? profile.nameTh : profile.name}{" "}
@@ -60,7 +58,6 @@ export default function ResumeDoc() {
         </p>
       </header>
 
-      {/* ── สรุปย่อ ── */}
       <section className="print-break mt-7">
         <Heading>{th ? "สรุปโดยย่อ" : "Summary"}</Heading>
         <div className="space-y-2.5">
@@ -72,7 +69,6 @@ export default function ResumeDoc() {
         </div>
       </section>
 
-      {/* ── ทักษะ ── */}
       <section className="print-break mt-7">
         <Heading>{th ? "ทักษะ" : "Skills"}</Heading>
         <dl className="space-y-2">
@@ -89,7 +85,6 @@ export default function ResumeDoc() {
         </dl>
       </section>
 
-      {/* ── ประสบการณ์ ── */}
       <section className="mt-7">
         <Heading>{th ? "ประสบการณ์ทำงาน" : "Experience"}</Heading>
         <div className="space-y-5">
@@ -123,7 +118,6 @@ export default function ResumeDoc() {
         </div>
       </section>
 
-      {/* ── ผลงาน ── */}
       <section className="mt-7">
         <Heading>{th ? "ผลงานที่ผ่านมา" : "Selected Projects"}</Heading>
         <div className="space-y-4">

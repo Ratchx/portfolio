@@ -43,7 +43,9 @@ const GREETING: Record<Lang, Line[]> = {
   ],
 };
 
-function run(raw: string, lang: Lang): Line[] {
+type Years = { coding: number; fivem: number };
+
+function run(raw: string, lang: Lang, years: Years): Line[] {
   const cmd = raw.trim().toLowerCase();
   const th = lang === "th";
 
@@ -62,8 +64,8 @@ function run(raw: string, lang: Lang): Line[] {
         {
           kind: "out",
           text: th
-            ? "เขียนโค้ด 5 ปี / FiveM 2 ปี / ภาษาแรกคือ JavaScript"
-            : "5 years coding / 2 years FiveM / started on JavaScript",
+            ? `เขียนโค้ด ${years.coding} ปี / FiveM ${years.fivem} ปี / ภาษาแรกคือ JavaScript`
+            : `${years.coding} years coding / ${years.fivem} years FiveM / started on JavaScript`,
         },
         { kind: "out", text: `${th ? "ปัจจุบัน" : "currently"}: ${profile.company}` },
       ];
@@ -105,7 +107,7 @@ function run(raw: string, lang: Lang): Line[] {
         { kind: "out", text: `web      : Svelte 5, Node.js` },
         { kind: "out", text: `servers  : Bubble Town, Sea City, Wavevy City` },
         { kind: "out", text: `players  : 4,400+` },
-        { kind: "out", text: `uptime   : ${th ? "5 ปี" : "5 years"}` },
+        { kind: "out", text: `uptime   : ${years.coding} ${th ? "ปี" : "years"}` },
       ];
 
     case "sudo":
@@ -154,7 +156,7 @@ const COLORS: Record<Line["kind"], string> = {
 };
 
 export default function TerminalWidget() {
-  const { lang, t } = useLang();
+  const { lang, t, years } = useLang();
   const [lines, setLines] = useState<Line[]>([]);
   const [value, setValue] = useState("");
   const [history, setHistory] = useState<string[]>([]);
@@ -162,7 +164,6 @@ export default function TerminalWidget() {
   const bodyRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // ทักทายใหม่เมื่อสลับภาษา
   useEffect(() => {
     setLines(GREETING[lang]);
   }, [lang]);
@@ -186,7 +187,7 @@ export default function TerminalWidget() {
     setLines((prev) => [
       ...prev,
       { kind: "in", text: entered },
-      ...run(entered, lang),
+      ...run(entered, lang, years),
     ]);
   };
 
@@ -233,13 +234,11 @@ export default function TerminalWidget() {
             aria-label="console input"
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={(e) => {
-              // จัดการ Enter เองแทนการพึ่ง implicit submit ของฟอร์ม
               if (e.key === "Enter") {
                 e.preventDefault();
                 execute();
                 return;
               }
-              // ลูกศรขึ้น-ลงย้อนคำสั่งเดิม เหมือนเชลล์จริง
               if (e.key === "ArrowUp") {
                 e.preventDefault();
                 const next = Math.min(cursor + 1, history.length - 1);

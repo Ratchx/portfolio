@@ -1,7 +1,5 @@
-/** URL หลักของเว็บ ใช้ทั้ง metadata, sitemap และ robots */
 export function siteUrl(): string {
   if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-  // Vercel ตั้งค่านี้ให้เองตอน deploy production
   if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
     return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
   }

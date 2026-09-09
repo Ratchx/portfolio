@@ -11,7 +11,6 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
-// ฟอนต์สำรองสำหรับตัวอักษรไทย เพราะ JetBrains Mono ไม่มีสระ/วรรณยุกต์ไทย
 const thai = IBM_Plex_Sans_Thai({
   subsets: ["thai", "latin"],
   weight: ["400", "500", "600", "700"],
@@ -68,7 +67,7 @@ export default function RootLayout({
   return (
     <html lang="th" className={`${jetbrains.variable} ${thai.variable}`}>
       <body className="antialiased">
-        <LangProvider>{children}</LangProvider>
+        <LangProvider year={new Date().getFullYear()}>{children}</LangProvider>
       </body>
     </html>
   );

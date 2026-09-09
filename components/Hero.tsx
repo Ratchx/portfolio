@@ -5,13 +5,11 @@ import { useEffect, useMemo, useState } from "react";
 import { profile, stats, ui } from "@/lib/content";
 import { useLang } from "@/lib/lang";
 
-/** พิมพ์แล้วลบวนไปเรื่อย ๆ ตามรายการที่ส่งเข้ามา */
 function useTyped(phrases: string[]) {
   const [index, setIndex] = useState(0);
   const [text, setText] = useState("");
   const [deleting, setDeleting] = useState(false);
 
-  // เริ่มใหม่เมื่อชุดข้อความเปลี่ยน เช่นตอนสลับภาษา
   useEffect(() => {
     setIndex(0);
     setText("");
@@ -48,8 +46,7 @@ function useTyped(phrases: string[]) {
 }
 
 export default function Hero() {
-  const { lang, t } = useLang();
-  // ต้อง memo ไว้ ไม่งั้นอาร์เรย์ใหม่ทุกเรนเดอร์จะรีเซ็ตการพิมพ์ไม่จบ
+  const { lang, t, fmt } = useLang();
   const phrases = useMemo(() => profile.typedRoles.map((r) => r[lang]), [lang]);
   const typed = useTyped(phrases);
 
@@ -113,7 +110,9 @@ export default function Hero() {
       <dl className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-4">
         {stats.map((s) => (
           <div key={s.value + s.label.en} className="bg-panel px-4 py-5">
-            <dt className="text-2xl font-bold text-acid tabular-nums sm:text-3xl">{s.value}</dt>
+            <dt className="text-2xl font-bold text-acid tabular-nums sm:text-3xl">
+              {fmt(s.value)}
+            </dt>
             <dd className="mt-1 text-[11px] text-dim sm:text-xs">{t(s.label)}</dd>
           </div>
         ))}
