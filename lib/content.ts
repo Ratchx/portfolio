@@ -251,6 +251,7 @@ export const experience: Job[] = [
     period: { th: "2024 – 2025", en: "2024 – 2025" },
     players: "2,000+",
     tag: { th: "ทำตั้งแต่ 0", en: "Built from zero" },
+    ended: true,
     summary: {
       th: "เป็นเดฟหลักของเมือง ทำตั้งแต่โฟลเดอร์ว่างจนผู้เล่นแตะ 2,000+ เป็นเมืองที่ใหญ่ที่สุดที่เคยดูแล",
       en: "Main developer from an empty folder to a 2,000+ player city, the largest server I have run.",
@@ -281,6 +282,7 @@ export const experience: Job[] = [
     period: { th: "2024", en: "2024" },
     players: "1,200+",
     tag: { th: "เมืองแรก", en: "First server" },
+    ended: true,
     summary: {
       th: "เมืองแรกในสาย FiveM รับเป็นเดฟหลักตั้งแต่วันแรก ทำจาก 0 จนเมืองเปิดจริงและมีผู้เล่น 1,200+",
       en: "My first FiveM server. Lead developer from day one, from zero to a live city with 1,200+ players.",
