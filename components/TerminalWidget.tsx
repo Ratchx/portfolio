@@ -67,7 +67,7 @@ function run(raw: string, lang: Lang, years: Years): Line[] {
             ? `เขียนโค้ด ${years.coding} ปี / FiveM ${years.fivem} ปี / ภาษาแรกคือ JavaScript`
             : `${years.coding} years coding / ${years.fivem} years FiveM / started on JavaScript`,
         },
-        { kind: "out", text: `${th ? "ปัจจุบัน" : "currently"}: ${profile.company}` },
+        { kind: "out", text: `${th ? "ปัจจุบัน" : "currently"}: ${profile.status[lang]}` },
       ];
 
     case "skills":

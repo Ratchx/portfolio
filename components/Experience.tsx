@@ -38,6 +38,11 @@ export default function Experience() {
                       {job.players} {t(ui.players)}
                     </span>
                   )}
+                  {job.ended && (
+                    <span className="rounded-sm border border-magenta/40 bg-magenta/5 px-2 py-0.5 text-[10px] text-magenta">
+                      {t(ui.left)}
+                    </span>
+                  )}
                 </div>
 
                 <p className="mt-1.5 text-[13px] text-cyber">{t(job.role)}</p>

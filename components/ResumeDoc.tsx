@@ -99,7 +99,10 @@ export default function ResumeDoc() {
                     </span>
                   )}
                 </h3>
-                <span className="text-[11px] text-faint">{t(job.period)}</span>
+                <span className="text-[11px] text-faint">
+                  {t(job.period)}
+                  {job.ended && ` · ${t(ui.left)}`}
+                </span>
               </div>
               <p className="text-[12px] text-cyber">{t(job.role)}</p>
               <ul className="mt-1.5 space-y-1">
@@ -137,7 +140,7 @@ export default function ResumeDoc() {
       </section>
 
       <footer className="print-rule mt-8 border-t border-line pt-4 text-[11px] text-faint">
-        {th ? "ปัจจุบันทำงานที่" : "Currently at"} {profile.company}
+        {t(ui.currently)}: {t(profile.status)}
       </footer>
     </div>
   );

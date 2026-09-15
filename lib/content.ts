@@ -22,7 +22,10 @@ export const profile = {
   email: "inbox.ratchanonnt@hotmail.com",
   github: "https://github.com/Ratchx",
   githubUser: "Ratchx",
-  company: "BT GLOBAL INFINITY CO., LTD.",
+  status: {
+    th: "ว่างงาน พร้อมเริ่มงานทันที",
+    en: "Available now, can start immediately",
+  } as L,
   role: {
     th: "FiveM Developer / Full-Stack Developer",
     en: "FiveM Developer / Full-Stack Developer",
@@ -73,9 +76,8 @@ export const about: { body: L[]; facts: { k: L; v: L }[] } = {
     { k: { th: "ชื่อจริง", en: "Name" }, v: { th: "รัชชานนท์ (Ratchx)", en: "Ratchanon (Ratchx)" } },
     { k: { th: "ชื่อสายเดฟ", en: "Dev handle" }, v: { th: "rt script", en: "rt script" } },
     { k: { th: "ภาษาแรก", en: "First language" }, v: { th: "JavaScript", en: "JavaScript" } },
-    { k: { th: "ปัจจุบัน", en: "Currently" }, v: { th: profile.company, en: profile.company } },
     { k: { th: "ที่อยู่", en: "Based in" }, v: { th: "ประเทศไทย", en: "Thailand" } },
-    { k: { th: "สถานะ", en: "Status" }, v: { th: "เปิดรับงาน", en: "Open to work" } },
+    { k: { th: "สถานะ", en: "Status" }, v: profile.status },
   ],
 };
 
@@ -202,6 +204,7 @@ export type Job = {
   players?: string;
   tag: L;
   current?: boolean;
+  ended?: boolean;
   summary: L;
   points: L[];
   stack: string[];
@@ -209,37 +212,15 @@ export type Job = {
 
 export const experience: Job[] = [
   {
-    org: "BT GLOBAL INFINITY CO., LTD.",
-    role: { th: "Developer", en: "Developer" },
-    period: { th: "ปัจจุบัน", en: "Present" },
-    tag: { th: "งานประจำ", en: "Full-time" },
-    current: true,
-    summary: {
-      th: "ทำงานพัฒนาให้บริษัทเต็มเวลา ควบคู่กับงานสายเกมที่ทำต่อเนื่อง",
-      en: "Full-time development work alongside an ongoing game-server practice.",
-    },
-    points: [
-      {
-        th: "พัฒนาและดูแลระบบตามสโคปงานของบริษัท",
-        en: "Build and maintain systems across the company product scope.",
-      },
-      {
-        th: "ใช้ JavaScript TypeScript และ SQL เป็นหลักในงานประจำวัน",
-        en: "JavaScript, TypeScript, and SQL as the daily toolkit.",
-      },
-    ],
-    stack: ["TypeScript", "JavaScript", "SQL"],
-  },
-  {
     org: "Wavevy City",
     role: {
       th: "FiveM Developer — ดูแล Optimization",
       en: "FiveM Developer — Optimization Lead",
     },
-    period: { th: "2025 – ปัจจุบัน", en: "2025 – Present" },
+    period: { th: "2025 – 2026", en: "2025 – 2026" },
     players: "1,200+",
     tag: { th: "เข้ากลางคัน", en: "Joined mid-project" },
-    current: true,
+    ended: true,
     summary: {
       th: "เข้ามาตอนเมืองเปิดอยู่แล้ว รับผิดชอบหลักเรื่องประสิทธิภาพ ทำให้เมืองที่มีผู้เล่น 1,200+ ลื่นขึ้นโดยไม่ต้องรื้อของเดิม",
       en: "Came in after launch and took ownership of performance, making a 1,200+ player city run smooth without tearing down what already worked.",
@@ -383,7 +364,7 @@ export const projects: Project[] = [
   {
     name: { th: "ระบบภายในเมือง FiveM", en: "FiveM City Systems" },
     kind: { th: "งานสาย FiveM", en: "FiveM work" },
-    year: { th: "2024 – ปัจจุบัน", en: "2024 – Present" },
+    year: { th: "2024 – 2026", en: "2024 – 2026" },
     summary: {
       th: "รวมงานระบบที่เขียนให้เมืองต่าง ๆ ทั้งคอร์เฟรมเวิร์ก อาชีพ เศรษฐกิจ อินเวนทอรี และ NUI",
       en: "The systems behind the servers: core framework, jobs, economy, inventory, and NUI.",
@@ -414,7 +395,8 @@ export const ui = {
   copied: { th: "คัดลอกแล้ว", en: "copied" },
   emailMe: { th: "ส่งอีเมล", en: "Email me" },
   openGithub: { th: "เปิด GitHub", en: "Open GitHub" },
-  currentlyAt: { th: "ปัจจุบันทำงานที่", en: "Currently at" },
+  currently: { th: "ปัจจุบัน", en: "Currently" },
+  left: { th: "ออกแล้ว", en: "Left" },
   players: { th: "ผู้เล่น", en: "players" },
   scroll: { th: "เลื่อนลง", en: "scroll" },
   hint: { th: "พิมพ์ help แล้วกด Enter", en: "type help and press Enter" },

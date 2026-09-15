@@ -72,8 +72,8 @@ export default function Contact() {
             </div>
 
             <div className="flex items-center gap-3 rounded-sm border border-line bg-panel/90 px-4 py-3">
-              <span className="w-16 shrink-0 text-[11px] text-acid-dim">work</span>
-              <span className="flex-1 truncate text-[13px] text-dim">{profile.company}</span>
+              <span className="w-16 shrink-0 text-[11px] text-acid-dim">status</span>
+              <span className="flex-1 truncate text-[13px] text-dim">{t(profile.status)}</span>
             </div>
           </div>
 
