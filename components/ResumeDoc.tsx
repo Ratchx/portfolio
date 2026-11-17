@@ -104,7 +104,10 @@ export default function ResumeDoc() {
                   {job.ended && ` · ${t(ui.left)}`}
                 </span>
               </div>
-              <p className="text-[12px] text-cyber">{t(job.role)}</p>
+              <p className="text-[12px] text-cyber">
+                {t(job.role)}
+                {job.company && <span className="text-faint"> · {job.company}</span>}
+              </p>
               <ul className="mt-1.5 space-y-1">
                 {job.points.map((p, i) => (
                   <li key={i} className="flex gap-2 text-[12.5px] leading-relaxed text-dim">
@@ -140,7 +143,7 @@ export default function ResumeDoc() {
       </section>
 
       <footer className="print-rule mt-8 border-t border-line pt-4 text-[11px] text-faint">
-        {t(ui.currently)}: {t(profile.status)}
+        {t(ui.currentlyAt)} {profile.company}
       </footer>
     </div>
   );

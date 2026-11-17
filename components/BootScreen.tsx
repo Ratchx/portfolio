@@ -8,7 +8,7 @@ const LINES = [
   "[  OK  ] loading profile: ratchanon (ratchx)",
   "[  OK  ] runtime: lua / javascript / typescript / sql",
   "[  OK  ] linking fivem servers ... 3 found",
-  "[  OK  ] players served ... 4,400+",
+  "[  OK  ] players served ... 5,200+",
   "[ DONE ] handshake complete. welcome.",
 ];
 

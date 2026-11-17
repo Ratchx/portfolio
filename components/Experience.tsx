@@ -45,6 +45,9 @@ export default function Experience() {
                   )}
                 </div>
 
+                {job.company && (
+                  <p className="mt-1 text-[11px] tracking-wide text-dim">{job.company}</p>
+                )}
                 <p className="mt-1.5 text-[13px] text-cyber">{t(job.role)}</p>
                 <p className="mt-0.5 text-[11px] text-faint">{t(job.period)}</p>
 

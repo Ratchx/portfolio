@@ -67,7 +67,7 @@ function run(raw: string, lang: Lang, years: Years): Line[] {
             ? `เขียนโค้ด ${years.coding} ปี / FiveM ${years.fivem} ปี / ภาษาแรกคือ JavaScript`
             : `${years.coding} years coding / ${years.fivem} years FiveM / started on JavaScript`,
         },
-        { kind: "out", text: `${th ? "ปัจจุบัน" : "currently"}: ${profile.status[lang]}` },
+        { kind: "out", text: `${th ? "ปัจจุบัน" : "currently"}: ${profile.company}` },
       ];
 
     case "skills":
@@ -83,7 +83,10 @@ function run(raw: string, lang: Lang, years: Years): Line[] {
           kind: "ok",
           text: `${job.org}${job.players ? `  (${job.players} ${ui.players[lang]})` : ""}`,
         },
-        { kind: "out", text: `  ${job.role[lang]} — ${job.period[lang]}` },
+        {
+          kind: "out",
+          text: `  ${job.role[lang]}${job.company ? ` @ ${job.company}` : ""} — ${job.period[lang]}`,
+        },
       ]);
 
     case "projects":
@@ -105,8 +108,9 @@ function run(raw: string, lang: Lang, years: Years): Line[] {
         { kind: "out", text: `role     : ${profile.role[lang]}` },
         { kind: "out", text: `langs    : Lua, JavaScript, TypeScript, SQL` },
         { kind: "out", text: `web      : Svelte 5, Node.js` },
+        { kind: "out", text: `work     : ${profile.company}` },
         { kind: "out", text: `servers  : Bubble Town, Sea City, Wavevy City` },
-        { kind: "out", text: `players  : 4,400+` },
+        { kind: "out", text: `players  : 5,200+` },
         { kind: "out", text: `uptime   : ${years.coding} ${th ? "ปี" : "years"}` },
       ];
 

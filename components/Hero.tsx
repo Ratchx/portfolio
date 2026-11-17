@@ -119,8 +119,8 @@ export default function Hero() {
       </dl>
 
       <p className="mt-10 text-[11px] text-faint">
-        {t(ui.currently)}:{" "}
-        <span className="text-dim">{t(profile.status)}</span>
+        {t(ui.currentlyAt)}{" "}
+        <span className="text-dim">{profile.company}</span>
       </p>
     </section>
   );

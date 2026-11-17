@@ -22,10 +22,7 @@ export const profile = {
   email: "inbox.ratchanonnt@hotmail.com",
   github: "https://github.com/Ratchx",
   githubUser: "Ratchx",
-  status: {
-    th: "ว่างงาน พร้อมเริ่มงานทันที",
-    en: "Available now, can start immediately",
-  } as L,
+  company: "BT GLOBAL INFINITY CO., LTD.",
   role: {
     th: "FiveM Developer / Full-Stack Developer",
     en: "FiveM Developer / Full-Stack Developer",
@@ -46,7 +43,7 @@ export const stats: { value: string; label: L }[] = [
   { value: "{coding}", label: { th: "ปีที่เขียนโค้ด", en: "Years coding" } },
   { value: "{fivem}", label: { th: "ปีสาย FiveM", en: "Years on FiveM" } },
   { value: "3", label: { th: "เมืองที่ดูแล", en: "Servers shipped" } },
-  { value: "4,400+", label: { th: "ผู้เล่นรวม", en: "Players served" } },
+  { value: "5,200+", label: { th: "ผู้เล่นรวม", en: "Players served" } },
 ];
 
 export const nav: { id: string; label: L }[] = [
@@ -76,8 +73,8 @@ export const about: { body: L[]; facts: { k: L; v: L }[] } = {
     { k: { th: "ชื่อจริง", en: "Name" }, v: { th: "รัชชานนท์ (Ratchx)", en: "Ratchanon (Ratchx)" } },
     { k: { th: "ชื่อสายเดฟ", en: "Dev handle" }, v: { th: "rt script", en: "rt script" } },
     { k: { th: "ภาษาแรก", en: "First language" }, v: { th: "JavaScript", en: "JavaScript" } },
+    { k: { th: "ปัจจุบัน", en: "Currently" }, v: { th: profile.company, en: profile.company } },
     { k: { th: "ที่อยู่", en: "Based in" }, v: { th: "ประเทศไทย", en: "Thailand" } },
-    { k: { th: "สถานะ", en: "Status" }, v: profile.status },
   ],
 };
 
@@ -199,6 +196,7 @@ export const skills: SkillGroup[] = [
 
 export type Job = {
   org: string;
+  company?: string;
   role: L;
   period: L;
   players?: string;
@@ -212,20 +210,25 @@ export type Job = {
 
 export const experience: Job[] = [
   {
-    org: "Wavevy City",
+    org: "Wavevy City SS1 – 2",
+    company: "BT GLOBAL INFINITY CO., LTD.",
     role: {
       th: "FiveM Developer — ดูแล Optimization",
       en: "FiveM Developer — Optimization Lead",
     },
-    period: { th: "2025 – 2026", en: "2025 – 2026" },
-    players: "1,200+",
-    tag: { th: "เข้ากลางคัน", en: "Joined mid-project" },
-    ended: true,
+    period: { th: "2025 – ปัจจุบัน", en: "2025 – Present" },
+    players: "2,048",
+    tag: { th: "เต็ม slot · คิว 300+", en: "Full slots · 300+ queued" },
+    current: true,
     summary: {
-      th: "เข้ามาตอนเมืองเปิดอยู่แล้ว รับผิดชอบหลักเรื่องประสิทธิภาพ ทำให้เมืองที่มีผู้เล่น 1,200+ ลื่นขึ้นโดยไม่ต้องรื้อของเดิม",
-      en: "Came in after launch and took ownership of performance, making a 1,200+ player city run smooth without tearing down what already worked.",
+      th: "รับผิดชอบหลักเรื่องประสิทธิภาพของ Wavevy City ตั้งแต่ SS1 ถึง SS2 ภายใต้ BT GLOBAL INFINITY CO., LTD. SS2 ผู้เล่นเต็ม 2,048 slot ซึ่งเป็นเพดานของ FiveM และยังมีคิวรอเข้าเมืองอีก 300+",
+      en: "Own performance for Wavevy City from SS1 through SS2 under BT GLOBAL INFINITY CO., LTD. SS2 filled all 2,048 slots, the FiveM ceiling, with another 300+ players waiting in the queue.",
     },
     points: [
+      {
+        th: "SS1 เข้ามากลางคันตอนเมืองเปิดอยู่แล้วและมีผู้เล่น 1,200+ แล้วกลับมาดูแลต่อใน SS2",
+        en: "Joined SS1 mid-project with the city already live at 1,200+ players, then came back for SS2.",
+      },
       {
         th: "ไล่หา resource ที่กิน tick แล้วรื้อเขียนใหม่ ลดภาระทั้งฝั่ง client และ server",
         en: "Hunted down tick-hungry resources and rewrote them, cutting load on both client and server.",
@@ -253,8 +256,8 @@ export const experience: Job[] = [
     tag: { th: "ทำตั้งแต่ 0", en: "Built from zero" },
     ended: true,
     summary: {
-      th: "เป็นเดฟหลักของเมือง ทำตั้งแต่โฟลเดอร์ว่างจนผู้เล่นแตะ 2,000+ เป็นเมืองที่ใหญ่ที่สุดที่เคยดูแล",
-      en: "Main developer from an empty folder to a 2,000+ player city, the largest server I have run.",
+      th: "เป็นเดฟหลักของเมือง ทำตั้งแต่โฟลเดอร์ว่างจนผู้เล่นแตะ 2,000+ เป็นเมืองที่ใหญ่ที่สุดที่เคยสร้างเองจากศูนย์",
+      en: "Main developer from an empty folder to a 2,000+ player city, the largest server I have built from zero.",
     },
     points: [
       {
@@ -366,7 +369,7 @@ export const projects: Project[] = [
   {
     name: { th: "ระบบภายในเมือง FiveM", en: "FiveM City Systems" },
     kind: { th: "งานสาย FiveM", en: "FiveM work" },
-    year: { th: "2024 – 2026", en: "2024 – 2026" },
+    year: { th: "2024 – ปัจจุบัน", en: "2024 – Present" },
     summary: {
       th: "รวมงานระบบที่เขียนให้เมืองต่าง ๆ ทั้งคอร์เฟรมเวิร์ก อาชีพ เศรษฐกิจ อินเวนทอรี และ NUI",
       en: "The systems behind the servers: core framework, jobs, economy, inventory, and NUI.",
@@ -397,7 +400,7 @@ export const ui = {
   copied: { th: "คัดลอกแล้ว", en: "copied" },
   emailMe: { th: "ส่งอีเมล", en: "Email me" },
   openGithub: { th: "เปิด GitHub", en: "Open GitHub" },
-  currently: { th: "ปัจจุบัน", en: "Currently" },
+  currentlyAt: { th: "ปัจจุบันทำงานที่", en: "Currently at" },
   left: { th: "ออกแล้ว", en: "Left" },
   players: { th: "ผู้เล่น", en: "players" },
   scroll: { th: "เลื่อนลง", en: "scroll" },
