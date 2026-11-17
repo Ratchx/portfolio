@@ -312,12 +312,66 @@ export type Project = {
   name: L;
   kind: L;
   year: L;
+  url?: string;
   summary: L;
   points: L[];
   stack: string[];
 };
 
 export const projects: Project[] = [
+  {
+    name: { th: "A-Pay Payment Gateway", en: "A-Pay Payment Gateway" },
+    kind: { th: "ระบบชำระเงิน QR / PromptPay", en: "QR / PromptPay payments" },
+    year: { th: "2026", en: "2026" },
+    summary: {
+      th: "Payment Gateway ที่ตรวจการสแกนจ่าย QR / PromptPay แล้วยืนยันยอดเงินให้ทันที แอป Android เก็บแจ้งเตือนเงินเข้าจากแอปธนาคารเป็นหลักฐาน ส่วน backend เป็นที่เดียวที่ตัดสินผล",
+      en: "A payment gateway that checks a QR / PromptPay scan and confirms the amount instantly. An Android app collects the bank app's incoming-transfer notifications as evidence, and only the backend decides the result.",
+    },
+    points: [
+      {
+        th: "ออกแบบแบบ security-first และ fail-closed ยืนยันอัตโนมัติก็ต่อเมื่อผ่าน hard rule ครบ 19 ข้อ ไม่ผ่านข้อใดก็เข้าคิวให้คนตรวจ",
+        en: "Security-first and fail-closed: a payment auto-confirms only after passing all 19 hard rules, otherwise it goes to a human review queue.",
+      },
+      {
+        th: "สุ่มเศษสตางค์ให้ทุก order ยอดจึงไม่ชนกัน จับคู่เงินเข้ากับ order ได้แม้แจ้งเตือนไม่มีเลขอ้างอิง",
+        en: "Adds random satang to every order so amounts never collide, matching payments to orders even when the notification has no reference number.",
+      },
+      {
+        th: "ยืนยันตัวตนโทรศัพท์ด้วยคีย์ใน Android Keystore และ pin certificate ของแอปธนาคาร กันหลักฐานปลอม",
+        en: "Device identity from Android Keystore keys plus pinned bank-app certificates, so forged evidence is rejected.",
+      },
+      {
+        th: "Idempotency 4 ชั้น audit log แบบ hash chain และเทสต์ replay / race condition 100 เคส",
+        en: "Four layers of idempotency, a hash-chained audit log, and 100 tests for replay and race conditions.",
+      },
+    ],
+    stack: ["Kotlin", "TypeScript", "SQL", "MySQL / MariaDB"],
+  },
+  {
+    name: { th: "bunk", en: "bunk" },
+    kind: { th: "โปรแกรม Windows", en: "Windows desktop app" },
+    year: { th: "2026", en: "2026" },
+    url: "https://github.com/Ratchx/bunk-releases",
+    summary: {
+      th: "โปรแกรมเขียนด้วย Rust สำหรับรัน คุม และดูสถานะคำสั่งที่ต้องรันค้างไว้ตอน dev บน Windows เช่น npm run dev, redis-server หรือ ssh tunnel แนวคิดเดียวกับ Docker Compose แต่รันคำสั่งตรง ๆ ไม่ใช้ container",
+      en: "A Rust app that runs, supervises, and shows the status of long-running dev commands on Windows, such as npm run dev, redis-server, or an ssh tunnel. Same idea as Docker Compose, but it runs the commands directly with no containers.",
+    },
+    points: [
+      {
+        th: "แยกเป็นหน้าต่าง GUI กับ CLI + daemon ตั้งค่า service ของแต่ละโปรเจกต์ด้วยไฟล์ bunk.toml",
+        en: "Split into a GUI window and a CLI plus daemon, with each project's services defined in a bunk.toml file.",
+      },
+      {
+        th: "อัปเดตในแอปเฉพาะไฟล์ที่ลายเซ็น ed25519 และ sha256 ตรงทุกไฟล์ ไม่ยอมย้อนเวอร์ชัน และคืนไฟล์เดิมให้เองถ้าพลาดกลางทาง",
+        en: "In-app updates install only files whose ed25519 signature and sha256 hashes match, refuse downgrades, and roll back automatically if anything fails mid-way.",
+      },
+      {
+        th: "ติดตั้งจาก .exe ไฟล์เดียวโดยไม่ต้องใช้สิทธิ์ admin ถอนได้จาก Settings ของ Windows และติดตั้งแบบไม่ถามบน Server ได้",
+        en: "Installs from a single .exe without admin rights, uninstalls from Windows Settings, and supports silent installs on servers.",
+      },
+    ],
+    stack: ["Rust", "WebView2", "CLI", "Windows"],
+  },
   {
     name: { th: "Discord Bot เติมเกม", en: "Game Top-up Discord Bot" },
     kind: { th: "บอท + ระบบชำระเงิน", en: "Bot + payments" },

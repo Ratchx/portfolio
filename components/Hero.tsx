@@ -54,11 +54,6 @@ export default function Hero() {
     <section className="relative flex min-h-[100svh] flex-col justify-center pt-24 pb-16">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-grid mask-fade" aria-hidden="true" />
 
-      <p className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-acid-dim/40 bg-acid/5 px-3 py-1.5 text-[11px] text-acid">
-        <span className="size-1.5 rounded-full bg-acid pulse-dot" aria-hidden="true" />
-        {lang === "th" ? "เปิดรับงาน / ว่างรับโปรเจกต์" : "Available for work"}
-      </p>
-
       <p className="mb-3 text-sm text-dim">
         <span className="text-acid-dim">$</span> whoami
       </p>
