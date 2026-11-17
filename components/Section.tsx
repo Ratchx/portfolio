@@ -17,7 +17,7 @@ export default function Section({ id, index, title, command, children }: Props) 
   const { t } = useLang();
 
   return (
-    <section id={id} className="scroll-mt-24 py-20 sm:py-28">
+    <section id={id} className="py-20 sm:py-28">
       <Reveal>
         <header className="mb-10 sm:mb-14">
           <div className="flex items-baseline gap-3">

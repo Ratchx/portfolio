@@ -3,6 +3,15 @@
 import { useEffect, useRef } from "react";
 
 const GLYPHS = "01アイウエオカキクケコサシスセソタチツテトナニヌネノabcdefRT{}<>/\\[]$#";
+const FONT_SIZE = 15;
+const FRAME_MS = 55;
+
+// Brighter at the edges, dim in the middle. This used to be a CSS mask on the
+// canvas, which made the compositor re-mask the whole viewport on every frame.
+function edgeWeight(x: number) {
+  const d = Math.min(x, 1 - x);
+  return d >= 0.26 ? 0.18 : 1 - (d / 0.26) * 0.82;
+}
 
 export default function MatrixRain() {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -17,48 +26,54 @@ export default function MatrixRain() {
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
-    const FONT_SIZE = 15;
-    let columns = 0;
     let drops: number[] = [];
+    let weight: number[] = [];
     let raf = 0;
     let last = 0;
     let width = 0;
     let height = 0;
 
+    // Decorative background at 40% opacity: render at 1x regardless of DPR.
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      // Mobile URL bars change innerHeight while scrolling; only reallocate
+      // when the width changes or the canvas is too short.
+      if (w === width && h <= height) return;
+
+      width = w;
+      height = Math.max(h, height);
+      canvas.width = width;
+      canvas.height = height;
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.font = `${FONT_SIZE}px ui-monospace, monospace`;
 
-      columns = Math.ceil(width / FONT_SIZE);
+      const columns = Math.ceil(width / FONT_SIZE);
       drops = Array.from({ length: columns }, () =>
         Math.floor((Math.random() * -height) / FONT_SIZE),
       );
+      weight = Array.from({ length: columns }, (_, i) =>
+        edgeWeight((i * FONT_SIZE + FONT_SIZE / 2) / width),
+      );
     };
-
-    const FRAME_MS = 55;
 
     const draw = (now: number) => {
       raf = window.requestAnimationFrame(draw);
       if (now - last < FRAME_MS) return;
       last = now;
 
+      ctx.globalAlpha = 1;
       ctx.fillStyle = "rgba(4, 7, 10, 0.09)";
       ctx.fillRect(0, 0, width, height);
-      ctx.font = `${FONT_SIZE}px ui-monospace, monospace`;
+      ctx.fillStyle = "#00ff9c";
 
       for (let i = 0; i < drops.length; i++) {
-        const char = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-        const x = i * FONT_SIZE;
         const y = drops[i] * FONT_SIZE;
-
-        ctx.fillStyle = Math.random() > 0.985 ? "rgba(0,255,156,0.75)" : "rgba(0,255,156,0.22)";
-        ctx.fillText(char, x, y);
+        if (y > 0) {
+          ctx.globalAlpha = (Math.random() > 0.985 ? 0.75 : 0.22) * weight[i];
+          ctx.fillText(GLYPHS[(Math.random() * GLYPHS.length) | 0], i * FONT_SIZE, y);
+        }
 
         if (y > height && Math.random() > 0.975) drops[i] = 0;
         else drops[i] += 1;
@@ -90,7 +105,7 @@ export default function MatrixRain() {
     <canvas
       ref={ref}
       aria-hidden="true"
-      className="rain-mask pointer-events-none fixed inset-0 -z-10 opacity-40"
+      className="pointer-events-none fixed top-0 left-0 -z-10 opacity-40"
     />
   );
 }

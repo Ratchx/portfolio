@@ -12,7 +12,7 @@ const LINES = [
   "[ DONE ] handshake complete. welcome.",
 ];
 
-const LINE_MS = 130;
+const LINE_MS = 70;
 
 export default function BootScreen() {
   const [visible, setVisible] = useState(false);
@@ -37,7 +37,7 @@ export default function BootScreen() {
       timers.current.push(window.setTimeout(() => setShown(i + 1), i * LINE_MS));
     });
     timers.current.push(
-      window.setTimeout(() => setClosing(true), LINES.length * LINE_MS + 320),
+      window.setTimeout(() => setClosing(true), LINES.length * LINE_MS + 180),
     );
 
     return () => {
@@ -54,7 +54,7 @@ export default function BootScreen() {
       try {
         window.sessionStorage.setItem("rt.booted", "1");
       } catch {}
-    }, 520);
+    }, 320);
     return () => window.clearTimeout(t);
   }, [closing]);
 
@@ -64,7 +64,7 @@ export default function BootScreen() {
     <div
       role="presentation"
       onClick={() => setClosing(true)}
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-bg px-6 transition-opacity duration-500 ${
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-bg px-6 transition-opacity duration-300 ${
         closing ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
     >

@@ -29,8 +29,8 @@ function Bar({ level }: { level: number }) {
   return (
     <div ref={ref} className="mt-2 h-1 w-full overflow-hidden bg-line-soft">
       <div
-        className="h-full bg-gradient-to-r from-acid-dim to-acid transition-[width] duration-1000 ease-out"
-        style={{ width: inView ? `${level}%` : "0%" }}
+        className="h-full origin-left bg-gradient-to-r from-acid-dim to-acid transition-transform duration-1000 ease-out"
+        style={{ transform: `scaleX(${inView ? level / 100 : 0})` }}
       />
     </div>
   );

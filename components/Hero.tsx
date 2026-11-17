@@ -45,10 +45,16 @@ function useTyped(phrases: string[]) {
   return text;
 }
 
+// Kept in its own component so each keystroke re-renders one span,
+// not the whole hero.
+function TypedRole({ phrases }: { phrases: string[] }) {
+  const typed = useTyped(phrases);
+  return <span className="caret">{typed}</span>;
+}
+
 export default function Hero() {
   const { lang, t, fmt } = useLang();
   const phrases = useMemo(() => profile.typedRoles.map((r) => r[lang]), [lang]);
-  const typed = useTyped(phrases);
 
   return (
     <section className="relative flex min-h-[100svh] flex-col justify-center pt-24 pb-16">
@@ -72,7 +78,7 @@ export default function Hero() {
 
       <p className="mt-6 min-h-[1.75rem] text-base text-cyber sm:text-xl">
         <span className="text-faint">&gt; </span>
-        <span className="caret">{typed}</span>
+        <TypedRole phrases={phrases} />
       </p>
 
       <p className="mt-6 max-w-2xl text-sm leading-relaxed text-dim text-balance sm:text-base">
@@ -90,13 +96,13 @@ export default function Hero() {
           href={profile.github}
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-sm border border-line bg-bg/85 px-5 py-2.5 text-sm text-txt backdrop-blur-sm transition-colors hover:border-acid-dim hover:text-acid"
+          className="rounded-sm border border-line bg-bg/90 px-5 py-2.5 text-sm text-txt transition-colors hover:border-acid-dim hover:text-acid"
         >
           {t(ui.openGithub)}
         </a>
         <Link
           href="/resume"
-          className="rounded-sm border border-line bg-bg/85 px-5 py-2.5 text-sm text-txt backdrop-blur-sm transition-colors hover:border-acid-dim hover:text-acid"
+          className="rounded-sm border border-line bg-bg/90 px-5 py-2.5 text-sm text-txt transition-colors hover:border-acid-dim hover:text-acid"
         >
           {t(ui.viewResume)}
         </Link>

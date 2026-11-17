@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import ResumeDoc from "@/components/ResumeDoc";
-import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -9,10 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function ResumePage() {
-  return (
-    <>
-      <SmoothScroll />
-      <ResumeDoc />
-    </>
-  );
+  return <ResumeDoc />;
 }

@@ -40,7 +40,7 @@ export default function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "border-b border-line bg-bg/85 backdrop-blur-md" : "border-b border-transparent"
+        scrolled ? "border-b border-line bg-bg" : "border-b border-transparent"
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
@@ -52,7 +52,7 @@ export default function Nav() {
           <span className="flex gap-1.5" aria-hidden="true">
             <span className="size-2.5 rounded-full bg-magenta/70" />
             <span className="size-2.5 rounded-full bg-amber/70" />
-            <span className="size-2.5 rounded-full bg-acid pulse-dot" />
+            <span className="relative size-2.5 rounded-full bg-acid pulse-dot" />
           </span>
           <span className="text-white group-hover:text-acid">{profile.devName}</span>
         </Link>
@@ -105,7 +105,7 @@ export default function Nav() {
       </nav>
 
       {open && (
-        <ul className="border-t border-line bg-bg/95 px-5 py-3 backdrop-blur-md md:hidden">
+        <ul className="border-t border-line bg-bg px-5 py-3 md:hidden">
           {nav.map((item, i) => (
             <li key={item.id}>
               <a
